@@ -1,16 +1,16 @@
 package com.zsx.pn.dao;
 
 import com.zsx.pn.entity.Manager;
+import com.zsx.pn.web.Manage;
 import org.apache.ibatis.annotations.Param;
 
 public interface ManagerDao {
     /**
      * 根据用户名，密码查找
-     * @param name 用户名
-     * @param password 密码
+     * @param manager 密码
      * @return Manager
      */
-    Manager queryManager(@Param("name") String name, @Param("password") String password);
+    Manager queryManager(Manager manager);
 
     /**
      * 更改密码

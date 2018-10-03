@@ -16,8 +16,8 @@ public class ManagerDaoTest {
     private ManagerDao managerDao;
     @Test
     public void queryManager() {
-        Manager manager = managerDao.queryManager("admin","123456");
-        System.out.println(manager);
+//        Manager manager = managerDao.queryManager("admin","123456");
+//        System.out.println(manager);
     }
 
     @Test

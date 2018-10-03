@@ -5,7 +5,7 @@
 
 <mapper namespace="com.zsx.pn.dao.ManagerDao">
 
-    <select id="queryManager" resultType="com.zsx.pn.entity.Manager">
+    <select id="queryManager" parameterType="com.zsx.pn.entity.Manager" resultType="com.zsx.pn.entity.Manager">
         select * from manager_tb where name = #{name} and password = #{password}
     </select>
     <update id="updatePassword" parameterType="com.zsx.pn.entity.Manager">
