@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zsx.pn.dao.UserDao">
+
+    <select id="queryUser" resultType="com.zsx.pn.entity.User">
+        select * from user_tb where name = #{name}
+    </select>
+    <select id="queryUserById" resultType="com.zsx.pn.entity.User">
+        select * from user_tb where id = #{id}
+    </select>
+    <insert id="insertUser" parameterType="com.zsx.pn.entity.User">
+        insert into user_tb(name) values (#{name})
+    </insert>
+    <update id="updateUser" parameterType="com.zsx.pn.entity.User">
+        update user_tb set nick_name = #{nickName} where name = #{name}
+    </update>
+</mapper>

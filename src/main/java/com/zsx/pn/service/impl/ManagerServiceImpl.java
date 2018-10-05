@@ -4,6 +4,8 @@ import com.zsx.pn.dao.ManagerDao;
 import com.zsx.pn.entity.Manager;
 import com.zsx.pn.model.UpdateManagerPwdModel;
 import com.zsx.pn.service.ManagerService;
+import com.zsx.pn.service.RedisService;
+import com.zsx.pn.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ManagerDao managerDao;
-
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public Manager queryManager(Manager manager) {
@@ -36,6 +39,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void updateManager(UpdateManagerPwdModel updateManagerPwdModel) {
+
         if (updateManagerPwdModel.getManagerId() == null || updateManagerPwdModel.getManagerId().equals("")){
             throw new RuntimeException("请传入管理者id");
         }
@@ -48,6 +52,11 @@ public class ManagerServiceImpl implements ManagerService {
         if (!(updateManagerPwdModel.getPassword().equals(updateManagerPwdModel.getRePassword()))){
             throw new RuntimeException("两次输入的密码不一致");
         }
+
+        if (!updateManagerPwdModel.getToken().toString().equals(redisService.get("Manager_" + updateManagerPwdModel.getManagerId().toString()))){
+            throw new RuntimeException(Constant.TOKEN_UNVALID_STR);
+        }
+
         Manager manager = new Manager();
         manager.setId(updateManagerPwdModel.getManagerId());
         manager.setPassword(updateManagerPwdModel.getPassword());

@@ -1,8 +1,6 @@
 package com.zsx.pn.dao;
 
 import com.zsx.pn.entity.Manager;
-import com.zsx.pn.web.Manage;
-import org.apache.ibatis.annotations.Param;
 
 public interface ManagerDao {
     /**
