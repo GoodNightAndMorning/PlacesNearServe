@@ -47,6 +47,7 @@ create table places_tb (
   latitude double not null,
   creator_id int not null,
   create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  state int not null default 0,
   foreign key (tag_id) references tags_tb(id),
   foreign key (creator_id) references user_tb(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

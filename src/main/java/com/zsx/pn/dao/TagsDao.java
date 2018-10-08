@@ -30,4 +30,11 @@ public interface TagsDao {
      * @return
      */
     int updateTags(Tags tags);
+
+    /**
+     * 通过id查找标签
+     * @param id
+     * @return
+     */
+    Tags queryTagsById(@Param("id") int id);
 }

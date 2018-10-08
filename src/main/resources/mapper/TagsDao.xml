@@ -8,6 +8,9 @@
     <select id="queryTags" resultType="com.zsx.pn.entity.Tags">
         select * from tags_tb
     </select>
+    <select id="queryTagsById" resultType="com.zsx.pn.entity.Tags">
+        select * from tags_tb where id = #{id}
+    </select>
     <insert id="insertTags" parameterType="com.zsx.pn.entity.Tags">
         insert into tags_tb(name, creator) values (#{name }, #{creator})
     </insert>
