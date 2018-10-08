@@ -3,6 +3,7 @@ package com.zsx.pn.web;
 import com.zsx.pn.dto.BaseDto;
 import com.zsx.pn.entity.Places;
 import com.zsx.pn.entity.Tags;
+import com.zsx.pn.entity.User;
 import com.zsx.pn.enumerate.ResCodeEnum;
 import com.zsx.pn.model.*;
 import com.zsx.pn.service.PlacesService;
