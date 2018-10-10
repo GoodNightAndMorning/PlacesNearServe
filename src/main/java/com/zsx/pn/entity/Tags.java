@@ -5,6 +5,7 @@ import java.util.Date;
 public class Tags {
     private Integer id;
     private String name;
+    private Integer number;
     private String creator;
     private Date createTime;
 
@@ -24,6 +25,14 @@ public class Tags {
         this.name = name;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
     public String getCreator() {
         return creator;
     }
@@ -39,14 +48,14 @@ public class Tags {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
     @Override
     public String toString() {
         return "Tags{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", number=" + number +
                 ", creator='" + creator + '\'' +
-                ", create_time=" + createTime +
+                ", createTime=" + createTime +
                 '}';
     }
 }

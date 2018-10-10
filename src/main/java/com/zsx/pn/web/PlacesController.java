@@ -1,5 +1,6 @@
 package com.zsx.pn.web;
 
+import com.github.pagehelper.PageInfo;
 import com.zsx.pn.dto.BaseDto;
 import com.zsx.pn.entity.Places;
 import com.zsx.pn.entity.Tags;
@@ -29,11 +30,12 @@ public class PlacesController {
      * @return
      */
     @RequestMapping(value = "getTagsList", method = RequestMethod.GET)
-    public BaseDto<List<Tags>> getTagsList() {
+    public BaseDto<PageInfo<Tags>> getTagsList(GetTagsListModel listModel) {
         try {
+            listModel.enablePaging();
             List<Tags> list = tagsService.queryTags();
-
-            return new BaseDto<List<Tags>>("获取列表成功", list, ResCodeEnum.SUCCESS.getCode());
+            PageInfo<Tags> pageInfo = new PageInfo<Tags>(list);
+            return new BaseDto<PageInfo<Tags>>("获取列表成功", pageInfo, ResCodeEnum.SUCCESS.getCode());
         } catch (Exception e) {
             return new BaseDto<>(e.getMessage(), ResCodeEnum.FAILURE.getCode());
         }

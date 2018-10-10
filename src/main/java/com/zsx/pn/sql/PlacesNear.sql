@@ -13,16 +13,33 @@ insert into manager_tb (name, password) values (
 create table tags_tb (
   id int not null primary key auto_increment,
   name varchar(50) not null,
+  number int default 0,
   creator varchar(50),
   create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+//["公交站","地铁站","电动车维修店","四儿子店","商业广场","垃圾回收站","医院","诊所","银行","派出所","ATM"]
 insert into tags_tb (name, creator) values (
-  "美食", "admin"
+  "四儿子店", "admin"
 ),(
-  "公交站", "admin"
+  "商业广场", "admin"
+),(
+  "垃圾回收站", "admin"
+),(
+  "医院", "admin"
+),(
+  "诊所", "admin"
+),(
+  "银行", "admin"
+),(
+  "派出所", "admin"
+),(
+  "ATM", "admin"
 ),(
   "超市", "admin"
+),(
+  "KTV", "admin"
+),(
+  "酒吧", "admin"
 );
 
 //创建用户表

@@ -4,6 +4,7 @@ public class InsertTagsModel {
     private Integer userId;
     private String token;
     private String tagName;
+    private String number;
     private String tagCreator;
 
     public Integer getUserId() {
