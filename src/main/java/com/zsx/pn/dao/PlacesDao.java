@@ -17,7 +17,7 @@ public interface PlacesDao {
      * 获取所以地点
      * @return
      */
-    List<Places> queryPlacesList();
+    List<Places> queryPlacesList(@Param("userId") Integer userId);
     /**
      * 根据id获取地点
      * @return
@@ -30,14 +30,6 @@ public interface PlacesDao {
      * @return
      */
     int insertPlaces(Places places);
-
-    /**
-     * 更新地点状态
-     * @param id
-     * @param state
-     * @return
-     */
-    int updatePlacesOfState(@Param("id") int id, @Param("state") int state);
 
     /**
      * 更新地点信息

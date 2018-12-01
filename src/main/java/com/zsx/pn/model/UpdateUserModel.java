@@ -1,9 +1,18 @@
 package com.zsx.pn.model;
 
+import com.zsx.pn.anotationa.Token;
+
+import javax.validation.constraints.NotNull;
+
 public class UpdateUserModel {
+
+    @NotNull(message = "请传入userId")
     private Integer userId;
     private String nickName;
+    @Token
+    @NotNull(message = "请传入token")
     private String token;
+
 
     public Integer getUserId() {
         return userId;

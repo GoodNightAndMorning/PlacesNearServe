@@ -28,11 +28,7 @@ public class PlacesServiceImpl implements PlacesService {
         List<Places> list = null;
 
         try {
-            if (model.getState() == null) {
-                list = placesDao.queryPlacesList();
-            }else {
-                list = placesDao.queryPlacesListByState(model.getState());
-            }
+            list = placesDao.queryPlacesList(model.getUserId());
             return list;
         }catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -66,11 +62,12 @@ public class PlacesServiceImpl implements PlacesService {
             places.setCreatorId(model.getUserId());
             places.setPlaceName(model.getPlaceName());
             places.setPlaceDesc(model.getPlaceDesc());
-            places.setPlacePhone(model.getPlacePhone());
+
             places.setPlacePhotos(model.getPlacePhotos());
             places.setTagId(model.getTagId());
             places.setLatitude(model.getLatitude());
             places.setLongitude(model.getLongitude());
+
             int res = placesDao.insertPlaces(places);
             if (res == 0) {
                 throw new RuntimeException("发布点点失败");
@@ -80,30 +77,6 @@ public class PlacesServiceImpl implements PlacesService {
         }
     }
 
-    @Override
-    public void changePlacesState(ChangePlacesStateModel model) {
-        if (model.getUserId() == null) {
-            throw new RuntimeException("请传入userId");
-        }
-        if (model.getToken() == null || model.getToken().equals("")) {
-            throw new RuntimeException("请传入token");
-        }
-        if (!model.getToken().toString().equals(redisService.get("User_" + model.getUserId().toString()))){
-            throw new RuntimeException(Constant.TOKEN_UNVALID_STR);
-        }
-
-        if (model.getState() == null) {
-            throw new RuntimeException("请传入state");
-        }
-        try {
-            int res = placesDao.updatePlacesOfState(model.getPlaceId(), model.getState());
-            if (res == 0) {
-                throw new RuntimeException("更新地点状态失败");
-            }
-        }catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 
     @Override
     public void updatePlaces(PublishPlacesModel model) {
@@ -123,9 +96,6 @@ public class PlacesServiceImpl implements PlacesService {
             }
             if (!(model.getPlaceDesc() == null || model.getPlaceDesc().equals(""))){
                 places.setPlaceDesc(model.getPlaceDesc());
-            }
-            if (!(model.getPlacePhone() == null || model.getPlacePhone().equals(""))){
-                places.setPlacePhone(model.getPlacePhone());
             }
             if (!(model.getPlacePhotos() == null || model.getPlacePhotos().equals(""))){
                 places.setPlacePhotos(model.getPlacePhotos());

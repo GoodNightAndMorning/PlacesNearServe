@@ -2,6 +2,7 @@ package com.zsx.pn.web;
 
 import com.github.pagehelper.PageInfo;
 import com.zsx.pn.dto.BaseDto;
+import com.zsx.pn.dto.BaseResult;
 import com.zsx.pn.entity.Places;
 import com.zsx.pn.entity.Tags;
 import com.zsx.pn.entity.User;
@@ -35,9 +36,10 @@ public class PlacesController {
             listModel.enablePaging();
             List<Tags> list = tagsService.queryTags();
             PageInfo<Tags> pageInfo = new PageInfo<Tags>(list);
-            return new BaseDto<PageInfo<Tags>>("获取列表成功", pageInfo, ResCodeEnum.SUCCESS.getCode());
+
+            return BaseResult.success(pageInfo, "获取列表成功");
         } catch (Exception e) {
-            return new BaseDto<>(e.getMessage(), ResCodeEnum.FAILURE.getCode());
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -51,13 +53,9 @@ public class PlacesController {
         try {
             tagsService.insertTags(tagsModel);
 
-            return new BaseDto("添加标签成功",1);
+            return BaseResult.success(null, "添加标签成功");
         } catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -71,13 +69,9 @@ public class PlacesController {
         try {
             tagsService.deleteTags(tagsModel);
 
-            return new BaseDto("删除标签成功",1);
+            return BaseResult.success(null, "删除标签成功");
         } catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -91,13 +85,9 @@ public class PlacesController {
         try {
             tagsService.updateTags(tagsModel);
 
-            return new BaseDto("更新标签成功",1);
+            return BaseResult.success(null, "更新标签成功");
         } catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -110,11 +100,10 @@ public class PlacesController {
     public BaseDto<List<Places>> queryPlacesList(QueryPlacesModel model) {
         try {
             List<Places> list = placesService.queryPlaces(model);
-            BaseDto<List<Places>> dto = new BaseDto<>("获取地点成功", list, ResCodeEnum.SUCCESS.getCode());
-            System.out.println(dto);
-            return dto;
+
+            return BaseResult.success(list, "获取地点成功");
         }catch (Exception e){
-            return new BaseDto<>(e.getMessage(),ResCodeEnum.FAILURE.getCode());
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -128,33 +117,9 @@ public class PlacesController {
         try {
             placesService.publishPlaces(model);
 
-            return new BaseDto("发布地点成功",ResCodeEnum.SUCCESS.getCode());
+            return BaseResult.success(null, "发布地点成功");
         }catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
-        }
-    }
-
-    /**
-     * 更新地点状态
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "updatePlaceOfState", method = RequestMethod.POST)
-    public BaseDto updatePlaceOfState(ChangePlacesStateModel model) {
-        try {
-            placesService.changePlacesState(model);
-
-            return new BaseDto("更新地点状态成功",ResCodeEnum.SUCCESS.getCode());
-        }catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -168,13 +133,9 @@ public class PlacesController {
         try {
             placesService.updatePlaces(model);
 
-            return new BaseDto("更新地点信息成功",ResCodeEnum.SUCCESS.getCode());
+            return BaseResult.success("更新地点信息成功");
         }catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 
@@ -187,14 +148,9 @@ public class PlacesController {
     public BaseDto deletePlace(DeletePlacesModel model) {
         try {
             placesService.deletePlaces(model);
-
-            return new BaseDto("更新地点信息成功",ResCodeEnum.SUCCESS.getCode());
+            return BaseResult.success("删除地点信息成功");
         }catch (Exception e) {
-            if (e.getMessage().equals(Constant.TOKEN_UNVALID_STR)) {
-                return new BaseDto(e.getMessage(),ResCodeEnum.UNVALID.getCode());
-            }else {
-                return new BaseDto(e.getMessage(), ResCodeEnum.FAILURE.getCode());
-            }
+            return BaseResult.failure(e.getMessage());
         }
     }
 }

@@ -21,7 +21,7 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return md5Str;
+        return id + "_" + md5Str;
     }
     /**
      * 验证手机号是否合法

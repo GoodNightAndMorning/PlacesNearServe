@@ -23,12 +23,6 @@ public interface PlacesService {
     void publishPlaces(PublishPlacesModel model);
 
     /**
-     * 改变地点发布状态
-     * @param model
-     */
-    void changePlacesState(ChangePlacesStateModel model);
-
-    /**
      * 更新地点信息
      * @param model
      */

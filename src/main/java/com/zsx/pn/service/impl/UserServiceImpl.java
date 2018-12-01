@@ -22,12 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(UserLoginModel loginModel) {
-        if (loginModel.getUserName() == null || loginModel.getUserName().equals("")) {
-            throw new RuntimeException("请传入手机号码");
-        }
-        if (!Utils.isMobileNO(loginModel.getUserName())) {
-            throw new RuntimeException("请传入正确的手机号码");
-        }
 
         try {
             User user = userDao.queryUser(loginModel.getUserName());
@@ -49,12 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(UpdateUserModel userModel) {
-        if (userModel.getUserId() == null) {
-            throw new RuntimeException("请传入用户id");
-        }
-        if (!userModel.getToken().toString().equals(redisService.get("User_" + userModel.getUserId().toString()))){
-            throw new RuntimeException(Constant.TOKEN_UNVALID_STR);
-        }
 
         try {
             User user = userDao.queryUserById(userModel.getUserId());

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zsx.pn.dao.CommenDao">
+
+    <select id="queryCommentList" resultMap="commenMap">
+        select * from commen_tb where place_id = #{placeId}
+    </select>
+
+    <insert id="addCommnet">
+        insert into commen_tb(content,place_id,creator_id) values (#{content},#{placeId},#{creatorId})
+    </insert>
+    <delete id="delectComment">
+        delete from commen_tb where id = #{commentId}
+    </delete>
+    <select id="getLastComment" resultMap="commenMap">
+        select * from commen_tb where id = (SELECT LAST_INSERT_ID())
+    </select>
+
+    <resultMap id="commenMap" type="com.zsx.pn.entity.Commen">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="place_id" property="placeId"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+
+        <!--<collection property="place" ofType="com.zsx.pn.entity.Places" select="getPlace" column="place_id"/>-->
+        <collection property="creator" ofType="com.zsx.pn.entity.User" select="getCreator" column="creator_id"/>
+        <!--<collection property="replyList" ofType="com.zsx.pn.entity.Reply" select="getReplys" column="id"/>-->
+    </resultMap>
+
+    <select id="getCreator" resultType="com.zsx.pn.entity.User">
+        select * from user_tb where id = #{creator_id}
+    </select>
+
+</mapper>

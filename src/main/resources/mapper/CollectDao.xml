@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zsx.pn.dao.CollectDao">
+
+    <select id="queryCollectList"
+            parameterType="com.zsx.pn.model.CollectModel.QueryCollectListModel"
+            resultMap="collectMap">
+        select * from collect_tb where user_id = #{userId}
+    </select>
+    <select id="queryCollect"
+            resultMap="collectMap">
+        select * from collect_tb where user_id = #{userId} and place_id = #{placeId}
+    </select>
+
+    <insert id="addCollect"
+            parameterType="com.zsx.pn.model.CollectModel.AddCollectModel">
+        insert into collect_tb(place_id,user_id) values (#{placeId},#{userId})
+    </insert>
+    <delete id="cancelCollect"
+            parameterType="com.zsx.pn.model.CollectModel.CancelCollectModel">
+        delete from collect_tb where place_id = #{placeId} and user_id = #{userId}
+    </delete>
+    <delete id="cancelCollectById"
+            parameterType="com.zsx.pn.model.CollectModel.CancelCollectModel">
+        delete from collect_tb where id = #{collectId} and user_id = #{userId}
+    </delete>
+
+    <resultMap id="collectMap" type="com.zsx.pn.entity.Collect">
+    <id column="id" property="id"/>
+    <result column="place_id" property="placeId"/>
+    <result column="user_id" property="userId"/>
+    <result column="create_time" property="createTime"/>
+    <association property="place" select="com.zsx.pn.dao.PlacesDao.queryPlaceById" column="place_id"></association>
+    </resultMap>
+</mapper>

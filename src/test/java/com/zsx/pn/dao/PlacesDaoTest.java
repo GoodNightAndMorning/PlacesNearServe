@@ -24,8 +24,8 @@ public class PlacesDaoTest {
 
     @Test
     public void queryPlacesList() {
-        List<Places> list = placesDao.queryPlacesList();
-        System.out.println(list);
+//        List<Places> list = placesDao.queryPlacesList();
+//        System.out.println(list);
     }
 
     @Test

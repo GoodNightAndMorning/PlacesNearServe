@@ -64,7 +64,6 @@ create table places_tb (
   latitude double not null,
   creator_id int not null,
   create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  state int not null default 0,
   foreign key (tag_id) references tags_tb(id),
   foreign key (creator_id) references user_tb(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -72,3 +71,55 @@ create table places_tb (
 insert into places_tb (tag_id, place_name, place_phone, place_desc, place_photos, longitude, latitude, creator_id) values (
   1, "招呼站", "15860763896", "xxxxxxxxxxxxxxxxx", "http://www.baidu.com", 26.0631080000, 119.3185120000, 1
 );
+
+//点赞表
+create table love_tb (
+  id int not null primary key auto_increment,
+  place_id int not  null ,
+  creator_id int not null,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  foreign key (place_id) references tags_tb(id),
+  foreign key (creator_id) references user_tb(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+//评论表
+create table commen_tb (
+  id int not null primary key auto_increment,
+  content Text not null,
+  place_id int not  null ,
+  creator_id int not null,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  foreign key (place_id) references tags_tb(id),
+  foreign key (creator_id) references user_tb(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+//回复表
+create table reply_tb (
+  id int not null primary key auto_increment,
+  content Text not null,
+  comment_id int not null ,
+  creator_id int not null,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  foreign key (comment_id) references tags_tb(id),
+  foreign key (creator_id) references user_tb(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+//收藏
+create table collect_tb (
+  id int not null primary key auto_increment,
+  place_id int not  null ,
+  user_id int not null,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  foreign key (place_id) references tags_tb(id),
+  foreign key (user_id) references user_tb(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+//关注作者列表
+create table attention_tb (
+  id int not null primary key auto_increment,
+  user_id int not null,
+  author_id int not null,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  foreign key (author_id) references user_tb(id),
+  foreign key (user_id) references user_tb(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

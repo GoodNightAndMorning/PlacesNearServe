@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zsx.pn.dao.LoveDao">
+
+    <select id="queryLoveList" resultType="com.zsx.pn.entity.Love">
+        select * from love_tb where place_id = #{placeId}
+    </select>
+    <select id="queryLove" resultType="com.zsx.pn.entity.Love">
+        select * from love_tb where place_id = #{placeId} and creator_id = #{creatorId}
+    </select>
+    <insert id="addLove">
+        insert into love_tb(place_id,creator_id) values (#{placeId},#{creatorId})
+    </insert>
+    <delete id="cancelLove">
+        delete from love_tb where id = #{loveId} and creator_id = #{creatorId}
+    </delete>
+
+    <!--<resultMap id="loveMap" type="com.zsx.pn.entity.Love">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="place_id" property="placeId"/>-->
+        <!--<result column="creator_id" property="creatorId"/>-->
+        <!--<result column="create_time" property="createTime"/>-->
+        <!--<association property="place" select="com.zsx.pn.dao.PlacesDao.queryPlaceById" column="place_id"></association>-->
+        <!--<association property="creator" select="com.zsx.pn.dao.UserDao.queryUserById" column="creator_id"></association>-->
+    <!--</resultMap>-->
+</mapper>

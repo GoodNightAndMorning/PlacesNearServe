@@ -8,7 +8,6 @@ public class PublishPlacesModel {
     private Integer id;
     private Integer tagId;
     private String placeName;
-    private String placePhone;
     private String placeDesc;
     private String placePhotos;
     private Double longitude;
@@ -44,14 +43,6 @@ public class PublishPlacesModel {
 
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
-    }
-
-    public String getPlacePhone() {
-        return placePhone;
-    }
-
-    public void setPlacePhone(String placePhone) {
-        this.placePhone = placePhone;
     }
 
     public String getPlaceDesc() {
@@ -94,19 +85,5 @@ public class PublishPlacesModel {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "PublishPlacesModel{" +
-                "userId=" + userId +
-                ", token='" + token + '\'' +
-                ", id=" + id +
-                ", tagId=" + tagId +
-                ", placeName='" + placeName + '\'' +
-                ", placePhone='" + placePhone + '\'' +
-                ", placeDesc='" + placeDesc + '\'' +
-                ", placePhotos='" + placePhotos + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                '}';
-    }
+
 }
